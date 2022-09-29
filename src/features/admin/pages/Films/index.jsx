@@ -120,6 +120,12 @@ function Films() {
 						<NavLink
 							to={`/showtime/${film.maPhim}`}
 							className="inline-block cursor-pointer text-cyan-500   hover:text-cyan-800 duration-500  text-lg"
+							onClick={() => {
+								localStorage.setItem(
+									"filmParams",
+									JSON.stringify(film)
+								);
+							}}
 						>
 							<CalendarOutlined />
 						</NavLink>
@@ -177,8 +183,8 @@ function Films() {
 							<img src={logo} alt="logo" />
 						</span>
 						<div className="text logo-text">
-							<span className="name">Codinglab</span>
-							<span className="profession">Web developer</span>
+							<span className="name">Dashboard</span>
+							<span className="profession">Admin page</span>
 						</div>
 					</div>
 					<i
@@ -195,6 +201,7 @@ function Films() {
 							onClick={handleCloseSidebar}
 						>
 							<i className="bx bx-search icon" />
+
 							<input
 								className="p-2"
 								type="text"
@@ -228,7 +235,15 @@ function Films() {
 					</div>
 					<div className="bottom-content">
 						<li className>
-							<a href="#0">
+							<a
+								href="#0"
+								onClick={(e) => {
+									e.preventDefault();
+									localStorage.removeItem("token");
+									localStorage.removeItem("user");
+									history.push("/signin");
+								}}
+							>
 								<i className="bx bx-log-out icon" />
 								<span className="text nav-text">Logout</span>
 							</a>
@@ -253,8 +268,12 @@ function Films() {
 				</div>
 			</nav>
 			<div className="home w-full">
-				<div className="text">
-					<h3 className="text-text-color">Quản lí phim</h3>
+				<div className="flex justify-end items-center px-4 py-3 mt-4 rounded-l-full rounded-br-full bg-sidebar-color w-max ml-auto mr-16">
+					<img className="w-12 h-12 " alt='' src="https://picsum.photos/300" style={{borderRadius:'50%'}} />
+					<h3 className="text-right text-text-color text-lg ml-4"><span className="text-text-color text-base">Welcome back</span> {(JSON.parse(localStorage.getItem('user')).hoTen)} !</h3>
+				</div>
+				<div className="text " style={{marginTop:"-12px"}}>
+					<h3 className="text-text-color text-4xl font-semibold text-center">Quản lí phim</h3>
 					<Button
 						onClick={() => {
 							history.push("/addfilms");
@@ -264,8 +283,8 @@ function Films() {
 						Thêm phim
 					</Button>
 					<Search
-						className="my-2 text-text-color"
-						placeholder="Search"
+						className="my-4 text-text-color search-button"
+						placeholder="Tìm tên phim"
 						allowClear
 						onSearch={onSearch}
 						size="medium"

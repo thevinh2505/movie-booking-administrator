@@ -109,7 +109,7 @@ export const updateFilmAction = (formData) => {
 export const deleteFilmAction = (maPhim) => {
 	return async (next) => {
 		try {
-			 await instance.request({
+			await instance.request({
 				url: "api/QuanLyPhim/XoaPhim",
 				method: "DELETE",
 				params: {
@@ -143,16 +143,16 @@ export const fetchscheduleAction = async (next) => {
 };
 
 // tạo lịch chiếu
-export const createShowtimeAction=(thongTinLichChieu)=>{
-	return async (next)=>{
-		try{
-			const res=await instance.request({
-				url:"api/QuanLyDatVe/TaoLichChieu",
-				method:"POST",
-				data:thongTinLichChieu,
-			})
-		}catch(err){
-			console.log(err)
+export const createShowtimeAction = (thongTinLichChieu) => {
+	return async () => {
+		try {
+			await instance.request({
+				url: "api/QuanLyDatVe/TaoLichChieu",
+				method: "POST",
+				data: thongTinLichChieu,
+			});
+		} catch (err) {
+			console.log(err);
 		}
-	}
-}
+	};
+};

@@ -1,10 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
 import logo from "assets/img/logo.png";
-import { NavLink, useHistory, useRouteMatch } from "react-router-dom";
-import { Button, Form, Radio, InputNumber, DatePicker, Select } from "antd";
+import { NavLink, useRouteMatch } from "react-router-dom";
+import {
+	Button,
+	Form,
+	Radio,
+	InputNumber,
+	DatePicker,
+	Select,
+	Row,
+	Col,
+} from "antd";
 
 import { instance } from "api/instance";
-import { useFormik, ErrorMessage } from "formik";
+import { useFormik } from "formik";
 import moment from "moment";
 import * as yup from "yup";
 const { Item } = Form;
@@ -21,8 +30,8 @@ function ShowTime() {
 		cumRapChieu: [],
 	});
 	const match = useRouteMatch();
-	const history = useHistory();
 
+	let filmData = {};
 	console.log(state.heThongRapChieu);
 	useEffect(() => {
 		return async () => {
@@ -41,8 +50,12 @@ function ShowTime() {
 		};
 	}, []);
 
+	// lấy dữ liệu localStorage
+	if (localStorage.getItem("filmParams")) {
+		filmData = JSON.parse(localStorage.getItem("filmParams"));
+	}
+	console.log(filmData);
 	// xử lí side bar
-
 	const sidebar = useRef();
 	const toggle = useRef();
 	const searchBtn = useRef();
@@ -151,8 +164,8 @@ function ShowTime() {
 							<img src={logo} alt="logo" />
 						</span>
 						<div className="text logo-text">
-							<span className="name">Codinglab</span>
-							<span className="profession">Web developer</span>
+							<span className="name">Dashboard</span>
+							<span className="profession">Admin page</span>
 						</div>
 					</div>
 					<i
@@ -226,96 +239,113 @@ function ShowTime() {
 					</div>
 				</div>
 			</nav>
-			<div className="home w-full">
-				<Form
-					onSubmitCapture={formik.handleSubmit}
-					className="text "
-					labelCol={{
-						span: 4,
-					}}
-					wrapperCol={{
-						span: 14,
-					}}
-					layout="horizontal"
-					initialValues={{
-						size: componentSize,
-					}}
-					onValuesChange={onFormLayoutChange}
-					size={componentSize}
-				>
-					<h3 className="text-text-color text-xl text-center mb-12">
-						TẠO LỊCH CHIẾU
+			
+			<Row className="home w-full">
+				<Col xs={4} className="ml-20 mt-4">
+					<h3 className="text-text-color text-xl mb-4">
+						{filmData.tenPhim}
 					</h3>
-					<Item label="Form Size" name="size">
-						<Radio.Group>
-							<Radio.Button value="small">Small</Radio.Button>
-							<Radio.Button value="default">Default</Radio.Button>
-							<Radio.Button value="large">Large</Radio.Button>
-						</Radio.Group>
-					</Item>
-					<Item label="Hệ thống rạp">
-						{/* SELECT     */}
-						<Select
-							options={state.heThongRapChieu?.map(
-								(heThongRap) => ({
-									label: heThongRap.tenHeThongRap,
-									value: heThongRap.maHeThongRap,
-								})
-							)}
-							onChange={handleChangeHeThongRap}
-							placeholder="Chọn hệ thống rạp"
-						/>
-					</Item>
+					<img
+						src={filmData.hinhAnh}
+						alt="anh Phim"
+						className="xl:w-56 md:w-48 "
+					/>
+				</Col>
+				<Col xs={18}>
+					<Form
+						onSubmitCapture={formik.handleSubmit}
+						className="text "
+						labelCol={{
+							span: 4,
+						}}
+						wrapperCol={{
+							span: 14,
+						}}
+						layout="horizontal"
+						initialValues={{
+							size: componentSize,
+						}}
+						onValuesChange={onFormLayoutChange}
+						size={componentSize}
+					>
+						<h3 className="text-text-color text-3xl text-center mb-6 font-semibold">
+							TẠO LỊCH CHIẾU
+						</h3>
+						<Item label="Form Size" name="size">
+							<Radio.Group>
+								<Radio.Button value="small">Small</Radio.Button>
+								<Radio.Button value="default">
+									Default
+								</Radio.Button>
+								<Radio.Button value="large">Large</Radio.Button>
+							</Radio.Group>
+						</Item>
+						<Item label="Hệ thống rạp">
+							{/* SELECT     */}
+							<Select
+								options={state.heThongRapChieu?.map(
+									(heThongRap) => ({
+										label: heThongRap.tenHeThongRap,
+										value: heThongRap.maHeThongRap,
+									})
+								)}
+								onChange={handleChangeHeThongRap}
+								placeholder="Chọn hệ thống rạp"
+							/>
+						</Item>
 
-					<Item label="Tên cụm rạp">
-						<Select
-							options={state.cumRapChieu?.map((cumRap) => ({
-								label: cumRap.tenCumRap,
-								value: cumRap.maCumRap,
-							}))}
-							onChange={handleChangeCumRap}
-							placeholder="Chọn cụm rạp"
-						/>
-						{formik.touched.maRap && formik.errors.maRap && (
-							<p className="text-red-600 mt-4 italic text-sm text-semibold">
-								{formik.errors.maRap}
-							</p>
-						)}
-					</Item>
-
-					<Item label="Chọn ngày giờ chiếu">
-						<DatePicker
-							format="DD/MM/YYYY hh:mm:ss"
-							showTime
-							onChange={onChangeDate}
-							onOk={onOk}
-						/>
-						{formik.touched.ngayChieuGioChieu &&
-							formik.errors.ngayChieuGioChieu && (
+						<Item label="Tên cụm rạp">
+							<Select
+								options={state.cumRapChieu?.map((cumRap) => ({
+									label: cumRap.tenCumRap,
+									value: cumRap.maCumRap,
+								}))}
+								onChange={handleChangeCumRap}
+								placeholder="Chọn cụm rạp"
+							/>
+							{formik.touched.maRap && formik.errors.maRap && (
 								<p className="text-red-600 mt-4 italic text-sm text-semibold">
-									{formik.errors.ngayChieuGioChieu}
+									{formik.errors.maRap}
 								</p>
 							)}
-					</Item>
-					<Item label="Giá vé " valuePropName="checked">
-						<InputNumber
-							onChange={onChangeInputNumber}
-							min={75000}
-							max={150000}
-						/>
-						{formik.touched.giaVe && formik.errors.giaVe && (
-							<p className="text-red-600 mt-4 italic text-sm text-semibold">
-								{formik.errors.giaVe}
-							</p>
-						)}
-					</Item>
-					<Item label="Tác vụ" className="text-text-color">
-						<Button loading={isLoading} htmlType="submit">
-							Tạo lịch chiếu{" "}
-						</Button>
-					</Item>
-				</Form>
-			</div>
+						</Item>
+
+						<Item label="Chọn ngày giờ chiếu">
+							<DatePicker
+								format="DD/MM/YYYY hh:mm:ss"
+								showTime
+								onChange={onChangeDate}
+								onOk={onOk}
+							/>
+							{formik.touched.ngayChieuGioChieu &&
+								formik.errors.ngayChieuGioChieu && (
+									<p className="text-red-600 mt-4 italic text-sm text-semibold">
+										{formik.errors.ngayChieuGioChieu}
+									</p>
+								)}
+						</Item>
+						<Item label="Giá vé " valuePropName="checked">
+							<InputNumber
+								onChange={onChangeInputNumber}
+								min={75000}
+								max={150000}
+								placeholder="Nhập giá vé"
+								className="w-32"
+							/>
+							{formik.touched.giaVe && formik.errors.giaVe && (
+								<p className="text-red-600 mt-4 italic text-sm text-semibold">
+									{formik.errors.giaVe}
+								</p>
+							)}
+						</Item>
+						<Item label="Tác vụ" className="text-text-color">
+							<Button loading={isLoading} htmlType="submit">
+								Tạo lịch chiếu{" "}
+							</Button>
+						</Item>
+					</Form>
+				</Col>
+			</Row>
 		</div>
 	);
 }

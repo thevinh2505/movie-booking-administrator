@@ -1,4 +1,4 @@
-import React, {  useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import logo from "assets/img/logo.png";
 import { NavLink } from "react-router-dom";
 
@@ -61,7 +61,7 @@ function AddFilms() {
 			danhGia: 0,
 			hinhAnh: {},
 			maNhom: "GP03",
-			ngayKhoiChieu:'',
+			ngayKhoiChieu: "",
 		},
 		onSubmit: (values) => {
 			console.log(values.hinhAnh.name);
@@ -130,7 +130,7 @@ function AddFilms() {
 		formik.setFieldValue("hinhAnh", file);
 	};
 	return (
-		<div className="" >
+		<div className="">
 			<nav className="sidebar close" ref={sidebar}>
 				<header>
 					<div className="image-text">
@@ -138,8 +138,8 @@ function AddFilms() {
 							<img src={logo} alt="logo" />
 						</span>
 						<div className="text logo-text">
-							<span className="name">Codinglab</span>
-							<span className="profession">Web developer</span>
+							<span className="name">Dashboard</span>
+							<span className="profession">Admin page</span>
 						</div>
 					</div>
 					<i
@@ -185,7 +185,6 @@ function AddFilms() {
 									</span>
 								</NavLink>
 							</li>
-							
 						</ul>
 					</div>
 					<div className="bottom-content">
@@ -215,7 +214,10 @@ function AddFilms() {
 				</div>
 			</nav>
 			<div className="home w-full">
+
+				<h3 className="text-text-color mt-4 mb-2 text-center text-3xl font-semibold" >Thêm phim</h3>
 				<Form
+					style={{marginTop:"-12px"}}
 					onSubmitCapture={formik.handleSubmit}
 					className="text"
 					labelCol={{
@@ -239,13 +241,25 @@ function AddFilms() {
 						</Radio.Group>
 					</Item>
 					<Item label="Tên Phim">
-						<Input onChange={formik.handleChange} name="tenPhim" />
+						<Input
+							onChange={formik.handleChange}
+							name="tenPhim"
+							placeholder="Nhập tên phim"
+						/>
 					</Item>
 					<Item label="Trailer">
-						<Input onChange={formik.handleChange} name="trailer" />
+						<Input
+							onChange={formik.handleChange}
+							name="trailer"
+							placeholder="Nhập link trailer"
+						/>
 					</Item>
 					<Item label="Mô Tả">
-						<Input onChange={formik.handleChange} name="moTa" />
+						<Input
+							onChange={formik.handleChange}
+							name="moTa"
+							placeholder="Nhập mô tả"
+						/>
 					</Item>
 					<Item label="Mã Nhóm">
 						<Input
@@ -258,6 +272,7 @@ function AddFilms() {
 						<DatePicker
 							format={"DD/MM/YY"}
 							onChange={handleChangeDatePicker}
+							placeholder="Chọn ngày chiếu"
 						/>
 					</Item>
 
@@ -272,11 +287,13 @@ function AddFilms() {
 					</Item>
 					<Item label="Đánh giá " valuePropName="checked">
 						<InputNumber
+							className="w-40 border-none"
 							onChange={(value) => {
 								formik.setFieldValue("danhGia", value);
 							}}
 							min={1}
 							max={10}
+							placeholder="Nhập điểm IMDB"
 						/>
 					</Item>
 					<Item label="Hình Ảnh" valuePropName="checked">

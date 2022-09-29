@@ -147,8 +147,8 @@ function EditFilms() {
 							<img src={logo} alt="logo" />
 						</span>
 						<div className="text logo-text">
-							<span className="name">Codinglab</span>
-							<span className="profession">Web developer</span>
+							<span className="name">Dashboard</span>
+							<span className="profession">Admin page</span>
 						</div>
 					</div>
 					<i
@@ -194,7 +194,6 @@ function EditFilms() {
 									</span>
 								</NavLink>
 							</li>
-							
 						</ul>
 					</div>
 					<div className="bottom-content">
@@ -224,6 +223,8 @@ function EditFilms() {
 				</div>
 			</nav>
 			<div className="home w-full">
+
+				<h3 className="text-text-color text-center text-3xl mt-4 mb-2 font-semibold">Edit phim</h3>
 				<Form
 					onSubmitCapture={formik.handleSubmit}
 					className="text"
@@ -238,7 +239,7 @@ function EditFilms() {
 						size: componentSize,
 					}}
 					onValuesChange={onFormLayoutChange}
-					size={componentSize}
+					size={componentSize} 
 				>
 					<Item label="Form Size" name="size">
 						<Radio.Group>

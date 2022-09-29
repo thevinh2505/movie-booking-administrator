@@ -35,8 +35,8 @@
 // 							<img src={logo} alt="logo" />
 // 						</span>
 // 						<div className="text logo-text">
-// 							<span className="name">Codinglab</span>
-// 							<span className="profession">Web developer</span>
+// 							<span className="name">Dashboard</span>
+// 							<span className="profession">Admin page</span>
 // 						</div>
 // 					</div>
 // 					<i
