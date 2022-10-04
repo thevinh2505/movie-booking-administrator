@@ -20,7 +20,7 @@ function SignIn() {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const goToHome = () => {
-		history.push('/');
+		history.push("/");
 	};
 	const formik = useFormik({
 		initialValues: {
@@ -29,7 +29,7 @@ function SignIn() {
 		},
 		onSubmit: (values) => {
 			handleSignIn(values);
-			history.push('/dashboard')
+			history.push("/dashboard");
 		},
 		validationSchema: schema,
 		validateOnChange: false,
@@ -63,7 +63,7 @@ function SignIn() {
 							<span>Account Name</span>
 						</div>
 						{formik.touched.taiKhoan && formik.errors.taiKhoan && (
-							<p className='text-red-600 ml-1 italic text-sm text-semibold'>
+							<p className="text-red-600 ml-1 italic text-sm text-semibold">
 								{formik.errors.taiKhoan}
 							</p>
 						)}
@@ -77,7 +77,7 @@ function SignIn() {
 							<span>Password</span>
 						</div>
 						{formik.touched.matKhau && formik.errors.matKhau && (
-							<p className='text-red-600 ml-1 italic '>
+							<p className="text-red-600 ml-1 italic ">
 								{formik.errors.matKhau}
 							</p>
 						)}
@@ -91,7 +91,6 @@ function SignIn() {
 								</span>
 							</Button>
 						</div>
-						
 					</form>
 				</div>
 				<div className="sign-in-close-btn absolute -top-5 -right-5">
