@@ -269,11 +269,23 @@ function Films() {
 			</nav>
 			<div className="home w-full">
 				<div className="flex justify-end items-center px-4 py-3 mt-4 rounded-l-full rounded-br-full bg-sidebar-color w-max ml-auto mr-16">
-					<img className="w-12 h-12 " alt='' src="https://picsum.photos/300" style={{borderRadius:'50%'}} />
-					<h3 className="text-right text-text-color text-lg ml-4"><span className="text-text-color text-base">Welcome back</span> {(JSON.parse(localStorage.getItem('user')).hoTen)} !</h3>
+					<img
+						className="w-12 h-12 "
+						alt=""
+						src="https://picsum.photos/300"
+						style={{ borderRadius: "50%" }}
+					/>
+					<h3 className="text-right text-text-color text-lg ml-4">
+						<span className="text-text-color text-base">
+							Welcome back
+						</span>{" "}
+						{JSON.parse(localStorage.getItem("user")).hoTen} !
+					</h3>
 				</div>
-				<div className="text " style={{marginTop:"-12px"}}>
-					<h3 className="text-text-color text-4xl font-semibold text-center">Quản lí phim</h3>
+				<div className="text " style={{ marginTop: "-12px" }}>
+					<h3 className="text-text-color text-4xl font-semibold text-center">
+						Quản lí phim
+					</h3>
 					<Button
 						onClick={() => {
 							history.push("/addfilms");
