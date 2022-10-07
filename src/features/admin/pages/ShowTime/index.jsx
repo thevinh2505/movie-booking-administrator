@@ -239,7 +239,7 @@ function ShowTime() {
 					</div>
 				</div>
 			</nav>
-			
+
 			<Row className="home w-full">
 				<Col xs={4} className="ml-20 mt-4">
 					<h3 className="text-text-color text-xl mb-4">

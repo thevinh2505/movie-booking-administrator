@@ -108,7 +108,7 @@ function Films() {
 									)
 								) {
 									// gọi async action
-									dispatch(deleteFilmAction(film.maPhim));
+									dispatch(deleteFilmAction(film.maPhim,film.tenPhim));
 								}
 							}}
 							key={2}

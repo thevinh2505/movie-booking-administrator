@@ -17,6 +17,7 @@ import {
 } from "antd";
 import { useFormik } from "formik";
 import moment from "moment";
+import swal from "sweetalert";
 const { Item } = Form;
 function EditFilms() {
 	//state img
@@ -96,6 +97,7 @@ function EditFilms() {
 
 			// call api gửi giá trị về BE
 			dispatch(updateFilmAction(formData));
+			
 		},
 	});
 	// hàm handle datepicker

@@ -1,6 +1,6 @@
 import { instance } from "api/instance";
 import { history } from "app/App";
-
+import swal from "sweetalert";
 export const SET_ARRAY_FILM = "admin/SET_ARRAY_FILM";
 export const SET_MOVIE_DETAIL = "booking/SET_MOVIE_DETAIL";
 export const SET_CINEMA_SYSTEM_INFO = "booking/SET_CINEMA_SYSTEM_INFO";
@@ -95,18 +95,29 @@ export const updateFilmAction = (formData) => {
 				method: "POST",
 				data: formData,
 			});
-			alert("Update film successfully!");
-			console.log(res.data.content);
+
 			dispatch(fetchArrayFilm());
 			history.push("/films");
+			swal({
+				title: "Edit film successfully!",
+				text: "Film edited successfully!",
+				icon: "success",
+				button: "OK",
+			});
 		} catch (err) {
 			console.log(err);
+			swal({
+				title: "Can't edit film!",
+				text: "Edit film failed!",
+				icon: "error",
+				button: "OK",
+			});
 		}
 	};
 };
 
 // Xóa film
-export const deleteFilmAction = (maPhim) => {
+export const deleteFilmAction = (maPhim, tenPhim) => {
 	return async (next) => {
 		try {
 			await instance.request({
@@ -116,9 +127,21 @@ export const deleteFilmAction = (maPhim) => {
 					MaPhim: maPhim,
 				},
 			});
-			alert("Delete film successfully!");
+			swal({
+				title: "Delete film successfully",
+				text: "You delete successfully" + tenPhim,
+				icon: "success",
+				button: "OK",
+			});
+
 			next(fetchArrayFilm());
 		} catch (err) {
+			swal({
+				title: "Cant' delete " + tenPhim,
+				text: "Only admin can delete film",
+				icon: "error",
+				button: "OK",
+			});
 			console.log(err);
 		}
 	};
