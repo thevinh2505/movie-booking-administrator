@@ -140,7 +140,7 @@ export const deleteFilmAction = (maPhim, tenPhim) => {
 			});
 			swal({
 				title: "Delete film successfully",
-				text: "You delete successfully" + tenPhim,
+				text: "You delete successfully " + tenPhim,
 				icon: "success",
 				button: "OK",
 			});
