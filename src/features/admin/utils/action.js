@@ -98,7 +98,7 @@ export const fetchMovieDetailAction = (maPhim) => {
 };
 
 // Cập nhật film
-export const updateFilmAction = (formData) => {
+export const updateFilmAction = (formData,history) => {
 	return async (dispatch) => {
 		try {
 			const res = await instance.request({
@@ -106,17 +106,18 @@ export const updateFilmAction = (formData) => {
 				method: "POST",
 				data: formData,
 			});
-
+			console.log(res.data.content)
 			dispatch(fetchArrayFilm());
-			history.push("/films");
 			swal({
 				title: "Edit film successfully!",
 				text: "Film edited successfully!",
 				icon: "success",
 				button: "OK",
+				timer:1500,
 			});
+			history.push("/films");
 		} catch (err) {
-			console.log(err);
+			console.log(err,'err');
 			swal({
 				title: "Can't edit film!",
 				text: "Edit film failed!",

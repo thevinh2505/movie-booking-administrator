@@ -189,7 +189,14 @@ function AddFilms() {
 					</div>
 					<div className="bottom-content">
 						<li className>
-							<a href="#0">
+							<a href="#0"
+								onClick={(e) => {
+									e.preventDefault();
+									localStorage.removeItem("token");
+									localStorage.removeItem("user");
+									history.push("/signin");
+								}}
+							>
 								<i className="bx bx-log-out icon" />
 								<span className="text nav-text">Logout</span>
 							</a>

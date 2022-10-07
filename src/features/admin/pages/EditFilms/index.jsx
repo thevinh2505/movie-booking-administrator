@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import logo from "assets/img/logo.png";
-import { NavLink, useRouteMatch } from "react-router-dom";
+import { NavLink, useHistory, useRouteMatch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
 	fetchMovieDetailAction,
@@ -17,11 +17,12 @@ import {
 } from "antd";
 import { useFormik } from "formik";
 import moment from "moment";
-import swal from "sweetalert";
+
 const { Item } = Form;
 function EditFilms() {
 	//state img
 	const [imgSrc, setImgSrc] = useState("");
+	const history=useHistory()
 	const dispatch = useDispatch();
 	const match = useRouteMatch();
 	const id = match.params.id;
@@ -96,7 +97,7 @@ function EditFilms() {
 			}
 
 			// call api gửi giá trị về BE
-			dispatch(updateFilmAction(formData));
+			dispatch(updateFilmAction(formData,history));
 			
 		},
 	});
@@ -200,7 +201,14 @@ function EditFilms() {
 					</div>
 					<div className="bottom-content">
 						<li className>
-							<a href="#0">
+							<a href="#0"
+								onClick={(e) => {
+									e.preventDefault();
+									localStorage.removeItem("token");
+									localStorage.removeItem("user");
+									history.push("/signin");
+								}}
+								>
 								<i className="bx bx-log-out icon" />
 								<span className="text nav-text">Logout</span>
 							</a>
