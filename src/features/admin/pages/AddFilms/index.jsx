@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import logo from "assets/img/logo.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 import {
@@ -18,7 +18,7 @@ import { addFilmUploadImageAction } from "features/admin/utils/action";
 const { Item } = Form;
 function AddFilms() {
 	const dispatch = useDispatch();
-
+	const history=useHistory()
 	//state img
 	const [imgSrc, setImgSrc] = useState("");
 	// form antd
@@ -85,7 +85,7 @@ function AddFilms() {
 			}
 
 			// call api gửi giá trị về BE
-			dispatch(addFilmUploadImageAction(formData));
+			dispatch(addFilmUploadImageAction(formData,history));
 		},
 	});
 

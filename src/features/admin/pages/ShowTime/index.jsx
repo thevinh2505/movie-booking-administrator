@@ -16,6 +16,7 @@ import { instance } from "api/instance";
 import { useFormik } from "formik";
 import moment from "moment";
 import * as yup from "yup";
+import swal from "sweetalert";
 const { Item } = Form;
 const schema = yup.object().shape({
 	ngayChieuGioChieu: yup.string().required("Vui lòng chọn lịch chiếu"),
@@ -145,9 +146,22 @@ function ShowTime() {
 					data: value,
 				});
 				setIsLoading(false);
-				alert(res.data.content);
+				swal({
+					title: "Add showtime successfully!",
+					text: "New showtime added!",
+					icon: "success",
+					button: "OK",
+					timer: 1500,
+				});
 			} catch (err) {
-				console.log(err);
+				swal({
+					title: "Add showtime failed!",
+					text: "Please try again!",
+					icon: "error",
+					button: "OK",
+
+					timer: 1500,
+				});
 				setIsLoading(false);
 			} finally {
 				setIsLoading(false);

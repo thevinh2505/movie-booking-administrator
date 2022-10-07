@@ -46,7 +46,7 @@ export const fetchArrayFilm = (tenPhim = "") => {
 };
 
 // thêm phim load hình
-export const addFilmUploadImageAction = (formData) => {
+export const addFilmUploadImageAction = (formData, history) => {
 	return async (next) => {
 		try {
 			const res = await instance.request({
@@ -54,13 +54,24 @@ export const addFilmUploadImageAction = (formData) => {
 				method: "POST",
 				data: formData,
 			});
-			alert("Add film successfully!");
-			console.log(res.data.content);
+			swal({
+				title: `Add film successfully!`,
+				text: `Film  ${formData.tenPhim} has been added`,
+				icon: "success",
+				button: "OK",
+				timer: 1500,
+			});
 			// next({
-
+			history.push("/films");
 			// })
 		} catch (err) {
-			console.log(err);
+			swal({
+				title: `Add film Failed!`,
+				text: `Maybe system has had film named ${formData.tenPhim} `,
+				icon: "error",
+				button: "OK",
+				timer: 1500,
+			});
 		}
 	};
 };
