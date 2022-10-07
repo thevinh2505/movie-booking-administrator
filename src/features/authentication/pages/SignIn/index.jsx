@@ -28,15 +28,12 @@ function SignIn() {
 			matKhau: "",
 		},
 		onSubmit: (values) => {
-			handleSignIn(values);
-			history.push("/dashboard");
+			dispatch(signInAction(values,history));
 		},
 		validationSchema: schema,
 		validateOnChange: false,
 	});
-	const handleSignIn = (user) => {
-		dispatch(signInAction(user));
-	};
+
 	return (
 		<div className="min-w-screen min-h-screen l bg-login items-center justify-center flex">
 			<div className="sign-in-container relative">

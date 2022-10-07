@@ -2,7 +2,7 @@ import { instance } from "api/instance";
 export const SET_PROFILE = "auth/SET_PROFILE";
 
 // action đăng nhập
-export const signInAction = (user) => {
+export const signInAction = (user,history) => {
 	return async (next) => {
 		try {
 			const res = await instance.request({
@@ -10,7 +10,7 @@ export const signInAction = (user) => {
 				method: "POST",
 				data: user,
 			});
-			console.log(res);
+			// console.log(res);
 			// lưu token xuống localStorage
 			localStorage.setItem("token", res.data.content.accessToken);
 
@@ -26,6 +26,7 @@ export const signInAction = (user) => {
 				type: SET_PROFILE,
 				payload: profile,
 			});
+			history.push('/')
 		} catch (err) {
 			console.log(err);
 		}
