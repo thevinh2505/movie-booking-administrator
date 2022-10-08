@@ -1,5 +1,4 @@
 import { instance } from "api/instance";
-import { history } from "app/App";
 import swal from "sweetalert";
 export const SET_ARRAY_FILM = "admin/SET_ARRAY_FILM";
 export const SET_MOVIE_DETAIL = "booking/SET_MOVIE_DETAIL";

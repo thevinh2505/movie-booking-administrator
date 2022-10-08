@@ -29,6 +29,7 @@ function Dashboard() {
 			dataIndex: "hinhAnh",
 			defaultSortOrder: "descend",
 			render: (text, object) => {
+				
 				return (
 					<img
 						style={{ minHeight: "100px" }}
@@ -274,13 +275,6 @@ function Dashboard() {
 					<h3 className="text-text-color text-4xl font-semibold text-center mb-4">
 						Danh sách phim
 					</h3>
-					{/* <Search
-						className="my-4 text-text-color search-button"
-						placeholder="Tìm tên phim"
-						allowClear
-						onSearch={onSearch}
-						size="medium"
-					/> */}
 					<Table
 						className="text-text-color"
 						columns={columns}
